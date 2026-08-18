@@ -11,7 +11,7 @@ ARG LOGS_PATH=$BASE_PATH/logs
 ARG N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=$N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
 ARG allowVulnerableTags=true
 ARG N8N_HOST=0.0.0.0
-ARG N8N_PORT=5678
+ARG N8N_PORT=7860
 ARG N8N_PROTOCOL=https
 ARG N8N_EDITOR_BASE_URL=$N8N_EDITOR_BASE_URL
 ARG WEBHOOK_URL=$WEBHOOK_URL
@@ -47,12 +47,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV PUPPETEER_SKIP_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
     N8N_HOST=0.0.0.0 \
-    N8N_PORT=5678 \
+    N8N_PORT=7860 \
     N8N_LISTEN_ADDRESS=0.0.0.0 \
     NODE_FUNCTION_ALLOW_BUILTIN=* \
     NODE_FUNCTION_ALLOW_EXTERNAL=*
 
-RUN npm install -g n8n@2.25.7 --no-audit --no-fund --loglevel=error
+RUN npm install -g n8n@2.35.3 --no-audit --no-fund --loglevel=error
 
 RUN cd /usr/local/lib/node_modules/n8n && \
     npm rebuild sqlite3 --build-from-source 2>/dev/null || true && \
@@ -75,7 +75,7 @@ USER nodejs
 
 WORKDIR /home/nodejs
 
-EXPOSE 5678
+EXPOSE 7860
 
 ENTRYPOINT ["tini", "--"]
 CMD ["n8n", "start"]
