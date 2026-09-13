@@ -28,8 +28,8 @@ ARG DB_POSTGRESDB_PASSWORD=$DB_POSTGRESDB_PASSWORD
 ARG NODE_FUNCTION_ALLOW_BUILTIN=*
 ARG NODE_FUNCTION_ALLOW_EXTERNAL=*
 
-RUN sed -i 's|deb.debian.org/debian-security|archive.debian.org/debian-security|g; s|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list \
-    && sed -i '/bullseye-updates/d' /etc/apt/sources.list
+RUN sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list \
+    && sed -i '/security/d' /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
