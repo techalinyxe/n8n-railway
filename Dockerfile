@@ -31,7 +31,7 @@ ARG NODE_FUNCTION_ALLOW_EXTERNAL=*
 RUN sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list \
     && sed -i '/security/d;/updates/d' /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     git \
     python3 \
     python3-pip \
@@ -46,7 +46,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     tini \
  && rm -rf /var/lib/apt/lists/*
-
+ 
 ENV PUPPETEER_SKIP_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
     N8N_HOST=0.0.0.0 \
