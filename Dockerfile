@@ -1,4 +1,4 @@
-FROM node:22-bullseye-slim
+FROM node:22-bookworm-slim
 
 USER root
 
@@ -27,9 +27,6 @@ ARG DB_POSTGRESDB_USER=$DB_POSTGRESDB_USER
 ARG DB_POSTGRESDB_PASSWORD=$DB_POSTGRESDB_PASSWORD
 ARG NODE_FUNCTION_ALLOW_BUILTIN=*
 ARG NODE_FUNCTION_ALLOW_EXTERNAL=*
-
-RUN sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list \
-    && sed -i '/security/d;/updates/d' /etc/apt/sources.list
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     git \
